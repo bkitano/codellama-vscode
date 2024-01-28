@@ -9,7 +9,7 @@ The iOPEX Copilot is a VSCode extension that helps you to write code faster and 
 2. Install this VS Code extension.
 3. Configure the extension variables in your VS Code settings, adding your OpenAI API key. You can find your API key in your [OpenAI dashboard](https://platform.openai.com/api-keys).
 4. Open a project with a Git repository.
-5. Run `Cmd-P` (Mac) or `Ctrl-P` (Windows) and type `> Run Open Cisco Copilot`. This will initialize the extension for the current project.
+5. Run `Cmd-P` (Mac) or `Ctrl-P` (Windows) and type `> Run Open iOpex Copilot`. This will initialize the extension for the current project.
 
 ## Features
 

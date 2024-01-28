@@ -17,9 +17,9 @@ type Settings = {
 const BASE_URL = "https://api.openai.com/v1";
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log('activating extension "cisco"');
+  console.log('activating extension "iopex"');
   // Get the settings from the extension's configuration
-  const config = vscode.workspace.getConfiguration("cisco");
+  const config = vscode.workspace.getConfiguration("iopex");
 
   // Create a new ChatGPTViewProvider instance and register it with the extension's context
   const provider = new ChatGPTViewProvider(context.extensionUri);
@@ -50,7 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   const commandHandler = (command: string) => {
-    const config = vscode.workspace.getConfiguration("cisco");
+    const config = vscode.workspace.getConfiguration("iopex");
     const prompt = config.get(command) as string;
     provider.search(prompt);
   };
@@ -59,27 +59,27 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register the commands that can be called from the extension's package.json
   context.subscriptions.push(
-    vscode.commands.registerCommand("cisco.ask", () =>
+    vscode.commands.registerCommand("iopex.ask", () =>
       vscode.window
         .showInputBox({ prompt: "What do you want to do?" })
         .then((value) => provider.search(value))
     ),
-    vscode.commands.registerCommand("cisco.refactor", () =>
+    vscode.commands.registerCommand("iopex.refactor", () =>
       commandHandler("promptPrefix.refactor")
     ),
-    vscode.commands.registerCommand("cisco.explain", () =>
+    vscode.commands.registerCommand("iopex.explain", () =>
       commandHandler("promptPrefix.explain")
     ),
-    vscode.commands.registerCommand("cisco.unitTest", () =>
+    vscode.commands.registerCommand("iopex.unitTest", () =>
       commandHandler("promptPrefix.unitTest")
     ),
-    vscode.commands.registerCommand("cisco.findProblems", () =>
+    vscode.commands.registerCommand("iopex.findProblems", () =>
       commandHandler("promptPrefix.findProblems")
     ),
-    vscode.commands.registerCommand("cisco.documentation", () =>
+    vscode.commands.registerCommand("iopex.documentation", () =>
       commandHandler("promptPrefix.documentation")
     ),
-    vscode.commands.registerCommand("cisco.resetConversation", () =>
+    vscode.commands.registerCommand("iopex.resetConversation", () =>
       provider.resetConversation()
     ),
 
@@ -178,7 +178,7 @@ export function activate(context: vscode.ExtensionContext) {
         let filePath = document.fileName;
         let ignoreFiles =
           (vscode.workspace
-            .getConfiguration("cisco")
+            .getConfiguration("iopex")
             .get("ignoreFiles") as string[]) || [];
         let shouldIgnore = ignoreFiles.some((regex) =>
           new RegExp(regex).test(filePath)
@@ -219,40 +219,40 @@ export function activate(context: vscode.ExtensionContext) {
   // Change the extension's session token or settings when configuration is changed
   vscode.workspace.onDidChangeConfiguration(
     (event: vscode.ConfigurationChangeEvent) => {
-      if (event.affectsConfiguration("cisco.apiKey")) {
-        const config = vscode.workspace.getConfiguration("cisco");
+      if (event.affectsConfiguration("iopex.apiKey")) {
+        const config = vscode.workspace.getConfiguration("iopex");
         provider.setAuthenticationInfo({ apiKey: config.get("apiKey") });
-      } else if (event.affectsConfiguration("cisco.apiUrl")) {
-        const config = vscode.workspace.getConfiguration("cisco");
+      } else if (event.affectsConfiguration("iopex.apiUrl")) {
+        const config = vscode.workspace.getConfiguration("iopex");
         let url = (config.get("apiUrl") as string) || BASE_URL;
         provider.setSettings({ apiUrl: url });
-      } else if (event.affectsConfiguration("cisco.model")) {
-        const config = vscode.workspace.getConfiguration("cisco");
+      } else if (event.affectsConfiguration("iopex.model")) {
+        const config = vscode.workspace.getConfiguration("iopex");
         provider.setSettings({ model: config.get("model") || "gpt-3.5-turbo" });
-      } else if (event.affectsConfiguration("cisco.selectedInsideCodeblock")) {
-        const config = vscode.workspace.getConfiguration("cisco");
+      } else if (event.affectsConfiguration("iopex.selectedInsideCodeblock")) {
+        const config = vscode.workspace.getConfiguration("iopex");
         provider.setSettings({
           selectedInsideCodeblock:
             config.get("selectedInsideCodeblock") || false,
         });
-      } else if (event.affectsConfiguration("cisco.codeblockWithLanguageId")) {
-        const config = vscode.workspace.getConfiguration("cisco");
+      } else if (event.affectsConfiguration("iopex.codeblockWithLanguageId")) {
+        const config = vscode.workspace.getConfiguration("iopex");
         provider.setSettings({
           codeblockWithLanguageId:
             config.get("codeblockWithLanguageId") || false,
         });
-      } else if (event.affectsConfiguration("cisco.pasteOnClick")) {
-        const config = vscode.workspace.getConfiguration("cisco");
+      } else if (event.affectsConfiguration("iopex.pasteOnClick")) {
+        const config = vscode.workspace.getConfiguration("iopex");
         provider.setSettings({
           pasteOnClick: config.get("pasteOnClick") || false,
         });
-      } else if (event.affectsConfiguration("cisco.keepConversation")) {
+      } else if (event.affectsConfiguration("iopex.keepConversation")) {
         const config = vscode.workspace.getConfiguration("chatgpt");
         provider.setSettings({
           keepConversation: config.get("keepConversation") || false,
         });
-      } else if (event.affectsConfiguration("cisco.timeoutLength")) {
-        const config = vscode.workspace.getConfiguration("cisco");
+      } else if (event.affectsConfiguration("iopex.timeoutLength")) {
+        const config = vscode.workspace.getConfiguration("iopex");
         provider.setSettings({
           timeoutLength: config.get("timeoutLength") || 60,
         });
@@ -262,7 +262,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 class ChatGPTViewProvider implements vscode.WebviewViewProvider {
-  public static readonly webviewId = "cisco.chatView"; // has to match the id in package.json/contributes/views/c
+  public static readonly webviewId = "iopex.chatView"; // has to match the id in package.json/contributes/views/c
   private _view?: vscode.WebviewView;
 
   private _chatGPTAPI?: ChatGPTAPI;
@@ -389,7 +389,7 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 
     // focus gpt activity from activity bar
     if (!this._view) {
-      await vscode.commands.executeCommand("cisco.chatView.focus");
+      await vscode.commands.executeCommand("iopex.chatView.focus");
     } else {
       this._view?.show?.(true);
     }
@@ -444,11 +444,11 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
       try {
         let res: ChatMessage;
         console.log(this._prompt?.slice(0, 6));
-        if (this._prompt?.slice(0, 6) === "/cisco") {
-          console.log("cisco command");
+        if (this._prompt?.slice(0, 6) === "/iopex") {
+          console.log("iopex command");
           this._prompt = this._prompt.slice(7);
 
-          const customEndpoint = "https://bkitano--cisco-llama-chat.modal.run";
+          const customEndpoint = "https://bkitano--iopex-llama-chat.modal.run";
           const body = {
             messages: [
               {
@@ -588,7 +588,7 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 				</style>
 			</head>
 			<body>
-				<input class="h-10 w-full text-white bg-stone-700 p-4 text-sm" placeholder="Ask Cisco Copilot" id="prompt-input" />
+				<input class="h-10 w-full text-white bg-stone-700 p-4 text-sm" placeholder="Ask iOpex Copilot" id="prompt-input" />
 				
 				<div id="response" class="pt-4 text-sm">
 				</div>

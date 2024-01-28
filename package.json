@@ -32,154 +32,154 @@
   "contributes": {
     "commands": [
       {
-        "command": "cisco.ask",
-        "title": "Ask Cisco"
+        "command": "iopex.ask",
+        "title": "Ask iOpex"
       },
       {
-        "command": "cisco.explain",
-        "title": "Cisco: Explain selection"
+        "command": "iopex.explain",
+        "title": "iOpex: Explain selection"
       },
       {
-        "command": "cisco.refactor",
-        "title": "Cisco: Refactor selection"
+        "command": "iopex.refactor",
+        "title": "iOpex: Refactor selection"
       },
       {
-        "command": "cisco.findProblems",
-        "title": "Cisco: Find problems"
+        "command": "iopex.findProblems",
+        "title": "iOpex: Find problems"
       },
       {
-        "command": "cisco.unitTest",
-        "title": "Cisco: Generate unit tests"
+        "command": "iopex.unitTest",
+        "title": "iOpex: Generate unit tests"
       },
       {
-        "command": "cisco.documentation",
-        "title": "Cisco: Write documentation"
+        "command": "iopex.documentation",
+        "title": "iOpex: Write documentation"
       },
       {
-        "command": "cisco.resetConversation",
-        "title": "Reset Cisco conversation"
+        "command": "iopex.resetConversation",
+        "title": "Reset iOpex conversation"
       },
       {
-        "command": "cisco.tryAgain",
-        "title": "Retry Cisco request"
+        "command": "iopex.tryAgain",
+        "title": "Retry iOpex request"
       },
       {
         "command": "aider.open",
-        "title": "Open Cisco Copilot"
+        "title": "Open iOpex Copilot"
       },
       {
         "command": "aider.syncFiles",
-        "title": "Cisco: Sync Open Files"
+        "title": "iOpex: Sync Open Files"
       },
       {
         "command": "aider.add",
-        "title": "Cisco: Scan File"
+        "title": "iOpex: Scan File"
       },
       {
         "command": "aider.drop",
-        "title": "Cisco: Drop File"
+        "title": "iOpex: Drop File"
       },
       {
         "command": "aider.close",
-        "title": "Close Cisco Copilot"
+        "title": "Close iOpex Copilot"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "cisco.ask",
+          "command": "iopex.ask",
           "when": "editorTextFocus",
           "group": "chatgpt-menu-group@1"
         },
         {
-          "command": "cisco.explain",
+          "command": "iopex.explain",
           "when": "editorHasSelection",
           "group": "chatgpt-menu-group@2"
         },
         {
-          "command": "cisco.refactor",
+          "command": "iopex.refactor",
           "when": "editorHasSelection",
           "group": "chatgpt-menu-group@3"
         },
         {
-          "command": "cisco.findProblems",
+          "command": "iopex.findProblems",
           "when": "editorHasSelection",
           "group": "chatgpt-menu-group@4"
         },
         {
-          "command": "cisco.unitTest",
+          "command": "iopex.unitTest",
           "when": "editorHasSelection",
           "group": "chatgpt-menu-group@5"
         },
         {
-          "command": "cisco.documentation",
+          "command": "iopex.documentation",
           "when": "editorHasSelection",
           "group": "chatgpt-menu-group@6"
         }
       ],
       "commandPalette": [
         {
-          "command": "cisco.ask"
+          "command": "iopex.ask"
         },
         {
-          "command": "cisco.explain",
+          "command": "iopex.explain",
           "when": "editorHasSelection"
         },
         {
-          "command": "cisco.refactor",
+          "command": "iopex.refactor",
           "when": "editorHasSelection"
         },
         {
-          "command": "cisco.findProblems",
+          "command": "iopex.findProblems",
           "when": "editorHasSelection"
         },
         {
-          "command": "cisco.unitTest",
+          "command": "iopex.unitTest",
           "when": "editorHasSelection"
         },
         {
-          "command": "cisco.documentation",
+          "command": "iopex.documentation",
           "when": "editorHasSelection"
         },
         {
-          "command": "cisco.resetConversation"
+          "command": "iopex.resetConversation"
         }
       ]
     },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "cisco",
-          "title": "Cisco Copilot",
+          "id": "iopex",
+          "title": "iOpex Copilot",
           "icon": "resources/icon.png"
         }
       ]
     },
     "views": {
-      "cisco": [
+      "iopex": [
         {
           "type": "webview",
-          "id": "cisco.chatView",
+          "id": "iopex.chatView",
           "name": "Chat"
         }
       ]
     },
     "configuration": {
-      "title": "Cisco Copilot",
+      "title": "iOpex Copilot",
       "type": "object",
       "properties": {
-        "cisco.apiKey": {
+        "iopex.apiKey": {
           "markdownDescription": "OpenAI API key from [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)",
           "type": "string",
           "order": 0
         },
-        "cisco.apiUrl": {
+        "iopex.apiUrl": {
           "markdownDescription": "OpenAI API URL or other custom API URL. Defaults to [https://api.openai.com/v1](https://api.openai.com/v1)",
           "type": "string",
           "default": "https://api.openai.com/v1",
           "order": 1
         },
-        "cisco.model": {
+        "iopex.model": {
           "type": "string",
           "enum": [
             "gpt-3.5-turbo",
@@ -189,67 +189,67 @@
           "description": "Which GPT model to use",
           "order": 1
         },
-        "cisco.pasteOnClick": {
+        "iopex.pasteOnClick": {
           "type": "boolean",
           "default": true,
           "description": "Paste the code from a codeblock inside the response into the editor when you click on it",
           "order": 2
         },
-        "cisco.promptPrefix.explain": {
+        "iopex.promptPrefix.explain": {
           "type": "string",
           "default": "Explain what this code does: ",
           "description": "The prompt prefix used for explaining the selected code",
           "order": 3
         },
-        "cisco.promptPrefix.refactor": {
+        "iopex.promptPrefix.refactor": {
           "type": "string",
           "default": "Refactor this code and explain what's changed: ",
           "description": "The prompt prefix used for refactoring the selected code",
           "order": 4
         },
-        "cisco.promptPrefix.findProblems": {
+        "iopex.promptPrefix.findProblems": {
           "type": "string",
           "default": "Find problems with the following code, fix them and explain what was wrong (Do not change anything else, if there are no problems say so): ",
           "description": "The prompt prefix used for finding problems in the selected code",
           "order": 5
         },
-        "cisco.promptPrefix.documentation": {
+        "iopex.promptPrefix.documentation": {
           "type": "string",
           "default": "Write documentation for the following code: ",
           "description": "The prompt prefix used for writing documentation for the selected code",
           "order": 7
         },
-        "cisco.promptPrefix.unitTest": {
+        "iopex.promptPrefix.unitTest": {
           "type": "string",
           "default": "Generate two unit tests for the following code: ",
           "description": "The prompt prefix used for unit testing the selected code",
           "order": 6
         },
-        "cisco.keepConversation": {
+        "iopex.keepConversation": {
           "type": "boolean",
           "default": true,
           "description": "Keep the conversation going by using the same conversation ID for all requests (allows follow-up questions)",
           "order": 8
         },
-        "cisco.timeoutLength": {
+        "iopex.timeoutLength": {
           "type": "number",
           "default": "120",
           "description": "How long should the request wait for a response before timing out (in seconds)",
           "order": 9
         },
-        "cisco.selectedInsideCodeblock": {
+        "iopex.selectedInsideCodeblock": {
           "type": "boolean",
           "default": true,
           "description": "Append selected code as a codeblock (```...code...```) instead of plain text",
           "order": 10
         },
-        "cisco.codeblockWithLanguageId": {
+        "iopex.codeblockWithLanguageId": {
           "type": "boolean",
           "default": true,
           "description": "Append language id of the selected code to the codeblock (```language...code...```)",
           "order": 11
         },
-        "cisco.ignoreFiles": {
+        "iopex.ignoreFiles": {
           "type": "array",
           "default": [],
           "items": {
@@ -257,12 +257,12 @@
           },
           "description": "List of regexes that match filenames that won't automatically be added to the Aider terminal process."
         },
-        "cisco.commandLine": {
+        "iopex.commandLine": {
           "type": "string",
           "default": "aider",
           "description": "Set that command to run aider.  This can be a path to a binary or a command that is available on the path.  You may also include parameters to aider."
         },
-        "cisco.workingDirectory": {
+        "iopex.workingDirectory": {
           "type": "string",
           "default": "",
           "description": "Set the working directory for Aider. Leave empty to use the workspace root or the directory of the active file."
